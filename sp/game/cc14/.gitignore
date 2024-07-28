@@ -1,0 +1,25 @@
+# Source generated files
+cfg/server_blacklist.txt
+content/**/*.sound.cache
+downloadlists/
+maps/graphs/
+sound/sound.cache
+demoheader.tmp
+ep1_gamestats.dat
+GameState.txt
+modelsounds.cache
+stats.txt
+voice_ban.dt
+save/
+*.lnk
+vpk_list.txt
+
+# Staged build files
+.staging/
+!.staging/*.vpk
+*.zip
+
+# Map generated files
+mapsrc/**/*.bsp
+mapsrc/**/*.prt
+mapsrc/**/*.vmx

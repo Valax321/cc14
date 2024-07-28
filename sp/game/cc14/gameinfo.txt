@@ -1,11 +1,13 @@
 "GameInfo"
 {
-	game 		"My First Episodic Mod"
+	game 		"CC14"
 	title 		"HALF-LIFE'"
 	title2		""
-	supportsvr	1
+	supportsvr	0
 
 	type		singleplayer_only
+	GameData	"halflife2.fgd"
+	mapbase_core 1
 
 	FileSystem
 	{
@@ -31,21 +33,12 @@
 		//
 		SearchPaths
 		{
-			// First, mount all user customizations.  This will search for VPKs and subfolders
-			// and mount them in alphabetical order.  The easiest way to distribute a mod is to
-			// pack up the custom content into a VPK.  To "install" a mod, just drop it in this
-			// folder.
-			//
-			// Note that this folder is scanned only when the game is booted.
-			game+mod			ep2/custom/*
-			game+mod			episodic/custom/*
-			game+mod			hl2/custom/*
-
 			// Now search loose files.  We'll set the directory containing the gameinfo.txt file
 			// as the first "mod" search path (after any user customizations).  This is also the one
 			// that's used when writing to the "mod" path.
 			game+mod+mod_write+default_write_path		|gameinfo_path|.
 			gamebin				|gameinfo_path|bin
+			game+mod			|gameinfo_path|content/*
 
 			// We search VPK files before ordinary folders, because most files will be found in
 			// VPK and we can avoid making thousands of file system calls to attempt to open files
