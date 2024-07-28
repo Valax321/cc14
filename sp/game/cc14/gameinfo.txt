@@ -8,6 +8,8 @@
 	type		singleplayer_only
 	GameData	"halflife2.fgd"
 	mapbase_core 1
+	player_default_model "models/player/player_test_citizen_female.mdl"
+	player_default_draw_externally 1
 
 	FileSystem
 	{
