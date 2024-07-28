@@ -115,7 +115,7 @@ ConVar	spec_freeze_distance_min( "spec_freeze_distance_min", "96", FCVAR_CHEAT, 
 ConVar	spec_freeze_distance_max( "spec_freeze_distance_max", "200", FCVAR_CHEAT, "Maximum random distance from the target to stop when framing them in observer freeze cam." );
 #endif
 
-static ConVar	cl_first_person_uses_world_model ( "cl_first_person_uses_world_model", "0", FCVAR_ARCHIVE, "Causes the third person model to be drawn instead of the view model" );
+static ConVar	cl_first_person_uses_world_model ( "cl_first_person_uses_world_model", "1", FCVAR_ARCHIVE, "Causes the third person model to be drawn instead of the view model" );
 
 ConVar demo_fov_override( "demo_fov_override", "0", FCVAR_CLIENTDLL | FCVAR_DONTRECORD, "If nonzero, this value will be used to override FOV during demo playback." );
 
@@ -336,6 +336,8 @@ END_RECV_TABLE()
 		RecvPropEHandle( RECVINFO( m_hPostProcessCtrl ) ),		// Send to everybody - for spectating
 		RecvPropEHandle( RECVINFO( m_hColorCorrectionCtrl ) ),	// Send to everybody - for spectating
 #endif
+
+		RecvPropEHandle(RECVINFO(m_hViewEntity)),
 
 #if defined USES_ECON_ITEMS
 		RecvPropUtlVector( RECVINFO_UTLVECTOR( m_hMyWearables ), MAX_WEARABLES_SENT_FROM_SERVER,	RecvPropEHandle(NULL, 0, 0) ),
@@ -1520,7 +1522,7 @@ int C_BasePlayer::DrawModel( int flags )
 
 #ifdef MAPBASE
 ConVar cl_player_allow_thirdperson_projtex( "cl_player_allow_thirdperson_projtex", "1", FCVAR_NONE, "Allows players to receive projected textures if they're non-local or in third person." );
-ConVar cl_player_allow_thirdperson_rttshadows( "cl_player_allow_thirdperson_rttshadows", "0", FCVAR_NONE, "Allows players to cast RTT shadows if they're non-local or in third person." );
+ConVar cl_player_allow_thirdperson_rttshadows( "cl_player_allow_thirdperson_rttshadows", "1", FCVAR_NONE, "Allows players to cast RTT shadows if they're non-local or in third person." );
 ConVar cl_player_allow_firstperson_projtex( "cl_player_allow_firstperson_projtex", "1", FCVAR_NONE, "Allows players to receive projected textures even if they're in first person." );
 ConVar cl_player_allow_firstperson_rttshadows( "cl_player_allow_firstperson_rttshadows", "0", FCVAR_NONE, "Allows players to cast RTT shadows even if they're in first person." );
 
@@ -2031,6 +2033,9 @@ void C_BasePlayer::ThirdPersonSwitch( bool bThirdperson )
 	{
 		return false;
 	}
+	if (pLocalPlayer->HasExternalViewEntity())
+		return false;
+
 	int ObserverMode = pLocalPlayer->GetObserverMode();
 	if ( ( ObserverMode == OBS_MODE_NONE ) || ( ObserverMode == OBS_MODE_IN_EYE ) )
 	{

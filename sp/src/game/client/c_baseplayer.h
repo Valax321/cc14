@@ -664,6 +664,12 @@ private:
 	CNetworkHandle( C_ColorCorrection, m_hColorCorrectionCtrl );	// active FXVolume color correction
 #endif
 
+	CNetworkHandle(C_BaseEntity, m_hViewEntity);
+public:
+		C_BaseEntity* GetViewEntity() const { return m_hViewEntity; }
+		bool HasExternalViewEntity() const { return m_hViewEntity != NULL; }
+private:
+
 public:
 
 	const char *GetLastKnownPlaceName( void ) const	{ return m_szLastPlaceName; }	// return the last nav place name the player occupied

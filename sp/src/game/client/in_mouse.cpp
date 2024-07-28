@@ -110,7 +110,7 @@ ConVar cl_mouselook( "cl_mouselook", "1", FCVAR_ARCHIVE, "Set to 1 to use mouse 
 ConVar cl_mouselook( "cl_mouselook", "1", FCVAR_ARCHIVE | FCVAR_NOT_CONNECTED, "Set to 1 to use mouse for look, 0 for keyboard look. Cannot be set while connected to a server." );
 #endif
 
-ConVar cl_mouseenable( "cl_mouseenable", "1" );
+ConVar cl_mouseenable( "cl_mouseenable", "0" );
 
 // From other modules...
 void GetVGUICursorPos( int& x, int& y );

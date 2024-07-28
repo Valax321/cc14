@@ -1203,7 +1203,7 @@ private:
 
 	bool					m_bPlayerUnderwater;
 
-	EHANDLE					m_hViewEntity;
+	CNetworkHandle(CBaseEntity, m_hViewEntity);
 
 	// Movement constraints
 	CNetworkHandle( CBaseEntity, m_hConstraintEntity );

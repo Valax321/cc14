@@ -8904,6 +8904,8 @@ void SendProxy_ShiftPlayerSpawnflags( const SendProp *pProp, const void *pStruct
 		SendPropEHandle		( SENDINFO(m_hColorCorrectionCtrl) ),
 #endif
 
+		SendPropEHandle(SENDINFO(m_hViewEntity)),
+
 #if defined USES_ECON_ITEMS
 		SendPropUtlVector( SENDINFO_UTLVECTOR( m_hMyWearables ), MAX_WEARABLES_SENT_FROM_SERVER, SendPropEHandle( NULL, 0 ) ),
 #endif // USES_ECON_ITEMS
