@@ -4,11 +4,11 @@ from os.path import join
 # Main settings
 game_name = "Network"
 version = "1.0"
-stage_paths = [ "bin", "cfg", "maps", "materials", "models", "particles", "resource", "scenes", "scripts", "shaders", "sound", "gameinfo.txt", "modelsounds.cache", "readme.txt" ]
+stage_paths = [ "bin", "cfg", "content", "maps", "materials", "models", "particles", "resource", "scenes", "scripts", "shaders", "sound", "gameinfo.txt", "modelsounds.cache", "readme.txt" ]
 
 # vpk settings
 target_folders = [ "materials", "models", "particles", "scenes", "resource", "scripts", "sound" ]
-file_types = [ "vmt", "vtf", "mdl", "phy", "vtx", "vvd", "pcf", "vcd", "txt", "res", "wav", "mp3", "cache", "lst", "nut", "ttf" ]
+file_types = [ "vmt", "vtf", "mdl", "phy", "vtx", "vvd", "ani", "pcf", "vcd", "txt", "res", "wav", "mp3", "cache", "lst", "nut", "ttf" ]
 vpk_path = "D:/Steam/steamapps/common/Source SDK Base 2013 Singleplayer/bin/vpk.exe"
 
 def copy(src, dest):
