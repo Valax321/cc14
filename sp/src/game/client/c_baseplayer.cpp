@@ -1308,10 +1308,47 @@ void C_BasePlayer::UpdateFlashlight()
 		}
 
 		Vector vecForward, vecRight, vecUp;
-		EyeVectors( &vecForward, &vecRight, &vecUp );
+		Vector position = EyePosition();
+		if (input->CAM_IsThirdPerson() || m_bDrawPlayerModelExternally)
+		{
+			/*if (GetActiveWeapon())
+			{
+				C_BaseCombatWeapon* pWeap = GetActiveWeapon();
+				int iAttachment = pWeap->LookupAttachment("muzzle");
+				if (iAttachment > 0)
+				{
+					QAngle ang;
+					pWeap->GetAttachment(iAttachment, position, ang);
+					AngleVectors(ang, &vecForward, &vecRight, &vecUp);
+					position += vecForward * 6.0f;
+				}
+				else
+				{
+					EyeVectors(&vecForward, &vecRight, &vecUp);
+					position += vecForward * (VEC_HULL_MAX).Length2D();
+				}
+			}*/
+
+			int iAttachment = LookupAttachment("anim_attachment_head");
+			if (iAttachment > 0)
+			{
+				QAngle ang;
+				GetAttachment(iAttachment, position, ang);
+				AngleVectors(ang, &vecUp, &vecRight, &vecForward); // Angles mangled to match weird bone rotation
+				vecForward *= -1;
+				position += vecForward * 6.0f;
+			}
+			else
+			{
+				EyeVectors(&vecForward, &vecRight, &vecUp);
+				position += vecForward * (VEC_HULL_MAX).Length2D();
+			}
+		}
+		else
+			EyeVectors(&vecForward, &vecRight, &vecUp);
 
 		// Update the light with the new position and direction.		
-		m_pFlashlight->UpdateLight( EyePosition(), vecForward, vecRight, vecUp, FLASHLIGHT_DISTANCE );
+		m_pFlashlight->UpdateLight( position, vecForward, vecRight, vecUp, FLASHLIGHT_DISTANCE );
 	}
 	else if (m_pFlashlight)
 	{

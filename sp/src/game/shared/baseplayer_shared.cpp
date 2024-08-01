@@ -1774,13 +1774,16 @@ void CBasePlayer::CalcViewRoll( QAngle& eyeAngles )
 
 void CBasePlayer::DoMuzzleFlash()
 {
-	for ( int i = 0; i < MAX_VIEWMODELS; i++ )
+	if (!m_bDrawPlayerModelExternally)
 	{
-		CBaseViewModel *vm = GetViewModel( i );
-		if ( !vm )
-			continue;
+		for (int i = 0; i < MAX_VIEWMODELS; i++)
+		{
+			CBaseViewModel* vm = GetViewModel(i);
+			if (!vm)
+				continue;
 
-		vm->DoMuzzleFlash();
+			vm->DoMuzzleFlash();
+		}
 	}
 
 	BaseClass::DoMuzzleFlash();

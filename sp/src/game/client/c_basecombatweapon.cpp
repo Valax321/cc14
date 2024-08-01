@@ -347,9 +347,8 @@ bool C_BaseCombatWeapon::IsCarriedByLocalPlayer( void )
 //-----------------------------------------------------------------------------
 bool C_BaseCombatWeapon::ShouldDrawUsingViewModel( void )
 {
-	return IsCarriedByLocalPlayer() && !C_BasePlayer::ShouldDrawLocalPlayer();
+	return IsCarriedByLocalPlayer() && ShouldDrawLocalPlayerViewModel();
 }
-
 
 //-----------------------------------------------------------------------------
 // Purpose: Returns true if this weapon is the local client's currently wielded weapon
@@ -370,7 +369,7 @@ bool C_BaseCombatWeapon::GetShootPosition( Vector &vOrigin, QAngle &vAngles )
 	C_BaseCombatCharacter *pEnt = ToBaseCombatCharacter( GetOwner() );
 	if ( pEnt )
 	{
-		if ( pEnt == C_BasePlayer::GetLocalPlayer() )
+		if ( /*pEnt == C_BasePlayer::GetLocalPlayer()*/ false )
 		{
 			vAngles = pEnt->EyeAngles();
 		}

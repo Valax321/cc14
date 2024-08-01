@@ -219,6 +219,7 @@ CPlayerLocalData::CPlayerLocalData()
 	m_audio.ent.Set( NULL );
 	m_pOldSkyCamera = NULL;
 	m_bDrawViewmodel = true;
+	m_bWearingSuit = true;
 }
 
 

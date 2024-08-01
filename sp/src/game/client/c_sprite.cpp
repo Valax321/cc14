@@ -392,6 +392,13 @@ int C_SpriteRenderer::DrawSprite(
 		C_BaseEntity *ent = attachedto->GetBaseEntity();
 		if ( ent )
 		{
+			if (ent->GetBaseAnimating() && ent->GetBaseAnimating()->IsViewModel())
+			{
+				C_BaseViewModel* pVm = (C_BaseViewModel*)ent;
+				C_BasePlayer* pOwner = (pVm->GetOwner() && pVm->GetOwner()->IsPlayer()) ? (C_BasePlayer*)pVm->GetOwner() : NULL;
+				if (pOwner && pOwner->GetActiveWeapon())
+					return 0; //worldmodels don't have the same attachments, so just get out (crossbow)
+			}
 			// don't draw viewmodel effects in reflections
 			if ( CurrentViewID() == VIEW_REFLECTION )
 			{

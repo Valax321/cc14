@@ -59,6 +59,8 @@ ConVar option_duck_method("option_duck_method", "1", FCVAR_REPLICATED|FCVAR_ARCH
 ConVar player_crouch_multiplier( "player_crouch_multiplier", "0.33333333", FCVAR_NONE );
 #endif
 
+ConVar player_back_move_speed_multiplier("player_back_move_speed_multiplier", "0.5", FCVAR_REPLICATED | FCVAR_CHEAT);
+
 #ifdef STAGING_ONLY
 #ifdef CLIENT_DLL
 ConVar debug_latch_reset_onduck( "debug_latch_reset_onduck", "1", FCVAR_CHEAT );
@@ -1950,6 +1952,11 @@ void CGameMovement::WalkMove( void )
 
 	VectorCopy (wishvel, wishdir);   // Determine maginitude of speed of move
 	wishspeed = VectorNormalize(wishdir);
+
+	if (fmove < 0)
+	{
+		wishspeed *= Clamp(player_back_move_speed_multiplier.GetFloat(), 0.0f, 1.0f);
+	}
 
 	//
 	// Clamp to server defined max speed
